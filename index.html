@@ -305,12 +305,48 @@
     <div class="container">
         <h2>Prêt à ne plus perdre un seul client ?</h2>
         <p>Laissez votre email. On vous configure tout — vous recevrez votre première réponse d'ici 24h.</p>
-        <form class="signup-form" action="/api/subscribe" method="POST">
+        <form class="signup-form" id="reviewwatch-form">
             <input type="text" name="business" placeholder="Nom de votre établissement" required>
             <input type="text" name="address" placeholder="Adresse Google Maps (ville, rue)" required>
             <input type="email" name="email" placeholder="Votre email" required>
-            <button type="submit">🚀 Lancer ReviewWatch</button>
+            <button type="submit" id="submit-btn">🚀 Lancer ReviewWatch</button>
+            <div id="form-status" style="display:none;padding:10px;border-radius:8px;"></div>
         </form>
+
+        <script>
+        document.getElementById('reviewwatch-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const status = document.getElementById('form-status');
+            const formData = new FormData(this);
+
+            btn.disabled = true;
+            btn.textContent = '⏳ Envoi en cours...';
+            status.style.display = 'none';
+
+            try {
+                const resp = await fetch('http://90.3.236.78:8081/', {
+                    method: 'POST',
+                    body: new URLSearchParams(formData),
+                });
+                if (resp.ok || resp.status === 303) {
+                    this.innerHTML = '<div style="text-align:center;padding:20px">' +
+                        '<div style="font-size:3rem;margin-bottom:10px">✅</div>' +
+                        '<h3 style="color:#4ade80">Inscription reçue !</h3>' +
+                        '<p style="color:#94a3b8">Nous vous recontactons sous 24h.</p></div>';
+                } else {
+                    throw new Error('Erreur serveur');
+                }
+            } catch(err) {
+                status.style.display = 'block';
+                status.style.background = '#2d1b1b';
+                status.style.color = '#ef4444';
+                status.textContent = '❌ Erreur de connexion. Envoyez-nous un email à contact@gk365.fr';
+                btn.disabled = false;
+                btn.textContent = '🚀 Lancer ReviewWatch';
+            }
+        });
+        </script>
     </div>
 </section>
 
