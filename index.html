@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReviewWatch — Réponses automatiques aux avis Google</title>
+    <meta name="description" content="Ne perdez plus de clients à cause d'avis ignorés. ReviewWatch répond automatiquement à chaque avis Google en 30 secondes. 79€/mois, zéro effort.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: radial-gradient(ellipse at center, #12121f 0%, #0a0a0f 70%);
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #4ade80, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: #94a3b8;
+            max-width: 650px;
+            margin-bottom: 40px;
+        }
+        .hero .stat-row {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        .hero .stat {
+            text-align: center;
+        }
+        .hero .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #4ade80;
+            display: block;
+        }
+        .hero .stat-label {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #4ade80, #22d3ee);
+            color: #0a0a0f;
+            font-weight: 700;
+            padding: 18px 48px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(74, 222, 128, 0.3);
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 20px;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 60px;
+            color: #f1f5f9;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background: #12121f;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 30px;
+            transition: border-color 0.3s;
+        }
+        .feature-card:hover {
+            border-color: #4ade80;
+        }
+        .feature-card .icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        .feature-card h3 {
+            color: #f1f5f9;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .pricing h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #f1f5f9;
+        }
+        .pricing .price-box {
+            display: inline-block;
+            background: #12121f;
+            border: 1px solid #4ade80;
+            border-radius: 20px;
+            padding: 40px 60px;
+            margin-top: 30px;
+        }
+        .pricing .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #4ade80;
+        }
+        .pricing .price span {
+            font-size: 1rem;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+        .pricing ul {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .pricing ul li {
+            padding: 8px 0;
+            color: #cbd5e1;
+        }
+        .pricing ul li::before {
+            content: "✅ ";
+        }
+
+        /* Signup */
+        .signup {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .signup h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #f1f5f9;
+        }
+        .signup p {
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+        .signup-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .signup-form input {
+            background: #12121f;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 16px 20px;
+            color: #f1f5f9;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .signup-form input:focus {
+            border-color: #4ade80;
+        }
+        .signup-form button {
+            background: linear-gradient(135deg, #4ade80, #22d3ee);
+            color: #0a0a0f;
+            font-weight: 700;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .signup-form button:hover {
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+            font-size: 0.85rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        @media (max-width: 640px) {
+            .hero .stat-row { gap: 20px; }
+            .pricing .price-box { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="container">
+        <h1>Ne laissez plus un avis Google sans réponse</h1>
+        <p>Chaque avis ignoré, c'est un client potentiel perdu. ReviewWatch répond automatiquement à tous vos avis Google en 30 secondes — dans le ton de votre marque, 24h/24.</p>
+        <div class="stat-row">
+            <div class="stat">
+                <span class="stat-number">22%</span>
+                <span class="stat-label">Plus de clients avec réponses aux avis</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">30s</span>
+                <span class="stat-label">Temps de réponse moyen</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">0</span>
+                <span class="stat-label">Effort de votre part</span>
+            </div>
+        </div>
+        <a href="#signup" class="cta-button">🚀 Démarrer l'essai gratuit</a>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <h2>Comment ça marche</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">🔍</div>
+                <h3>Surveillance automatique</h3>
+                <p>ReviewWatch surveille vos avis Google toutes les 2 heures. Dès qu'un nouvel avis tombe, il est détecté instantanément.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🤖</div>
+                <h3>Réponse IA personnalisée</h3>
+                <p>Notre IA génère une réponse professionnelle et adaptée au ton de votre établissement — positive ou négative, toujours pertinente.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📱</div>
+                <h3>Validation sur Telegram</h3>
+                <p>Recevez chaque réponse proposée sur Telegram. Validez, modifiez ou laissez partir automatiquement. Vous gardez le contrôle.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📈</div>
+                <h3>Impact visible sur votre note</h3>
+                <p>Les commerces qui répondent à leurs avis voient leur note augmenter de 0.5 à 1 étoile en moyenne sur 6 mois.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">⚡</div>
+                <h3>Installation en 5 minutes</h3>
+                <p>Donnez-nous votre établissement, on connecte tout. Aucune compétence technique requise.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🔄</div>
+                <h3>Multi-établissements</h3>
+                <p>Vous avez plusieurs restaurants, hôtels ou magasins ? On gère tout depuis un seul tableau de bord.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pricing">
+    <div class="container">
+        <h2>Un prix qui change tout</h2>
+        <p>Comparez : une agence facture 300-500€/mois pour répondre aux avis. Nous, c'est 79€.</p>
+        <div class="price-box">
+            <div class="price">79€ <span>/mois</span></div>
+            <ul>
+                <li>Surveillance 24h/24, 7j/7</li>
+                <li>Réponses IA illimitées</li>
+                <li>Validation Telegram incluse</li>
+                <li>1 établissement (5€/sup. supplémentaire)</li>
+                <li>Annulation à tout moment</li>
+            </ul>
+            <a href="#signup" class="cta-button" style="margin-top:10px">👉 Essai gratuit 7 jours</a>
+        </div>
+    </div>
+</section>
+
+<section class="signup" id="signup">
+    <div class="container">
+        <h2>Prêt à ne plus perdre un seul client ?</h2>
+        <p>Laissez votre email. On vous configure tout — vous recevrez votre première réponse d'ici 24h.</p>
+        <form class="signup-form" action="/api/subscribe" method="POST">
+            <input type="text" name="business" placeholder="Nom de votre établissement" required>
+            <input type="text" name="address" placeholder="Adresse Google Maps (ville, rue)" required>
+            <input type="email" name="email" placeholder="Votre email" required>
+            <button type="submit">🚀 Lancer ReviewWatch</button>
+        </form>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>ReviewWatch — Propulsé par Hermes Agent · © 2026 · Conçu et opéré par DBZ GOUKY</p>
+</footer>
+
+</body>
+</html>
