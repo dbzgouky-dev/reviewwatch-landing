@@ -130,6 +130,12 @@ select{width:100%;background:#1a1a2e;border:1px solid #1e293b;border-radius:8px;
 Vous les recevrez sous 24h pour validation.</p>
 </div>
 
+<div id="error-status" style="display:none;text-align:center;padding:20px;background:#1a0a0a;border:1px solid #ef4444;border-radius:16px;margin:20px 0">
+<h2 style="color:#ef4444;font-size:1.2rem">❌ Problème de formulaire</h2>
+<p id="error-message" style="color:#fca5a5;margin-top:10px"></p>
+<p style="color:#64748b;margin-top:15px;font-size:0.85rem">Vérifiez les champs et réessayez.</p>
+</div>
+
 </div>
 
 <script>
@@ -141,7 +147,7 @@ btn.textContent = '⏳ Envoi...';
 
 const data = new FormData(this);
 try {
-const resp = await fetch('http://90.3.236.78:8081/calibrate', {
+const resp = await fetch('http://90.3.236.78:8081/', {
 method: 'POST',
 body: data
 });
@@ -149,7 +155,18 @@ if (resp.ok) {
 document.getElementById('calibrate-form').style.display = 'none';
 document.getElementById('status').style.display = 'block';
 } else {
-throw new Error('Erreur');
+// Afficher les erreurs de validation
+const errData = await resp.json();
+const errorDiv = document.getElementById('error-status');
+const errorMsg = document.getElementById('error-message');
+if (errData.errors && errData.errors.length) {
+errorMsg.innerHTML = '⚠️ ' + errData.errors.join('<br>⚠️ ');
+} else {
+errorMsg.textContent = errData.message || 'Erreur de validation';
+}
+errorDiv.style.display = 'block';
+btn.disabled = false;
+btn.textContent = '✅ Générer mon profil';
 }
 } catch(err) {
 alert('❌ Erreur de connexion. Contactez-nous.');
