@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Calibration ReviewWatch</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6;padding:20px}
+.container{max-width:720px;margin:0 auto}
+h1{font-size:1.8rem;color:#4ade80;margin:30px 0 5px}
+.sub{color:#94a3b8;margin-bottom:30px}
+.section{background:#12121f;border:1px solid #1e293b;border-radius:16px;padding:24px;margin-bottom:20px}
+.section h2{color:#f1f5f9;font-size:1.1rem;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #1e293b}
+label{display:block;margin-bottom:15px;color:#cbd5e1;font-size:0.95rem}
+label span.desc{display:block;color:#64748b;font-size:0.8rem;margin-top:3px}
+input[type="radio"],input[type="checkbox"]{margin-right:8px;accent-color:#4ade80}
+textarea{width:100%;background:#1a1a2e;border:1px solid #1e293b;border-radius:8px;padding:12px;color:#e0e0e0;font-size:0.9rem;resize:vertical;margin-top:5px}
+textarea:focus{border-color:#4ade80;outline:none}
+.opt-group{margin:8px 0 8px 16px}
+.opt-group label{font-weight:400}
+select{width:100%;background:#1a1a2e;border:1px solid #1e293b;border-radius:8px;padding:12px;color:#e0e0e0;font-size:0.9rem;margin-top:5px}
+.btn-submit{background:linear-gradient(135deg,#4ade80,#22d3ee);color:#0a0a0f;font-weight:700;padding:16px 48px;border:none;border-radius:12px;font-size:1.1rem;cursor:pointer;display:block;margin:30px auto;transition:transform 0.2s}
+.btn-submit:hover{transform:translateY(-2px)}
+.btn-submit:disabled{opacity:0.5;cursor:not-allowed}
+#status{display:none;text-align:center;padding:40px;background:#12121f;border:1px solid #4ade80;border-radius:16px;margin:20px 0}
+#status h2{color:#4ade80;font-size:1.5rem}
+#status p{color:#94a3b8;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🎯 Calibration ReviewWatch</h1>
+<p class="sub">Répondez à ces questions pour qu'on réponde à vos avis Google exactement comme vous le feriez. 5 minutes.</p>
+
+<form id="calibrate-form">
+<input type="hidden" name="client_id" id="client_id" value="">
+
+<div class="section">
+<h2>🙋 Le relationnel client</h2>
+
+<label>1. Vous tutoyez ou vouvoiez vos clients ?
+<span class="desc">Comment vous parlez à vos clients dans vos réponses</span></label>
+<div class="opt-group">
+<label><input type="radio" name="tutoiement" value="tutoie" required> Je tutoie ("Merci d'être venu !")</label>
+<label><input type="radio" name="tutoiement" value="voussoie"> Je vouvoie ("Merci d'être venue !")</label>
+<label><input type="radio" name="tutoiement" value="depend"> Ça dépend (habitués / nouveaux)</label>
+</div>
+
+<label>2. Vous utilisez des émojis ?</label>
+<div class="opt-group">
+<label><input type="radio" name="emojis" value="oui" required> Oui, quelques-uns 😊🔥</label>
+<label><input type="radio" name="emojis" value="non"> Non, plutôt sobre</label>
+</div>
+</div>
+
+<div class="section">
+<h2>📝 Le style</h2>
+
+<label>3. Longueur idéale d'une réponse :</label>
+<div class="opt-group">
+<label><input type="radio" name="longueur" value="court" required> Court : 2-3 phrases, 30 mots max</label>
+<label><input type="radio" name="longueur" value="moyen"> Moyen : 4-5 phrases, 50 mots max</label>
+<label><input type="radio" name="longueur" value="long"> Détaillé : 6-8 phrases, 100 mots max</label>
+</div>
+
+<label>4. Vous parlez de votre resto comment ?</label>
+<div class="opt-group">
+<label><input type="radio" name="voix" value="equipe" required> "Nous" — l'équipe</label>
+<label><input type="radio" name="voix" value="je"> "Je" — le gérant</label>
+<label><input type="radio" name="voix" value="enseigne"> L'enseigne ("ROAR Burger")</label>
+</div>
+</div>
+
+<div class="section">
+<h2>🎯 Gestion des avis</h2>
+
+<label>5. Quand un avis est positif (4-5★), qu'est-ce qui compte ?</label>
+<div class="opt-group">
+<label><input type="checkbox" name="pos_merci" value="1"> Le remercier chaleureusement</label>
+<label><input type="checkbox" name="pos_plat" value="1"> Parler du plat qu'il mentionne</label>
+<label><input type="checkbox" name="pos_equipe" value="1"> Mentionner l'équipe</label>
+<label><input type="checkbox" name="pos_retour" value="1"> L'inviter à revenir (sans insister)</label>
+</div>
+
+<label>6. Quand un avis est négatif (1-2★) :</label>
+<div class="opt-group">
+<label><input type="checkbox" name="neg_reconnaitre" value="1"> Reconnaître le problème simplement</label>
+<label><input type="checkbox" name="neg_excuser" value="1"> S'excuser clairement</label>
+<label><input type="checkbox" name="neg_prive" value="1"> Proposer un contact privé pour résoudre</label>
+<label><input type="checkbox" name="neg_expliquer" value="1"> Expliquer brièvement si malentendu</label>
+</div>
+</div>
+
+<div class="section">
+<h2>✨ Votre patte personnelle</h2>
+
+<label>7. Qu'est-ce qui rend votre enseigne spéciale ?
+<span class="desc">2-3 phrases max. Ex: "notre smash burger maison, la déco street-art, l'équipe jeune"</span></label>
+<textarea name="specialite" rows="3" required></textarea>
+
+<label>8. Votre expression fétiche ou phrase signature :</label>
+<textarea name="signature" rows="2" placeholder='Ex: "La team ROAR vous dit à bientôt !"'></textarea>
+
+<label>9. Décrivez votre ton en 3 mots :</label>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<input type="text" name="mot1" placeholder="ex: chill" style="flex:1;background:#1a1a2e;border:1px solid #1e293b;border-radius:8px;padding:12px;color:#e0e0e0">
+<input type="text" name="mot2" placeholder="ex: authentique" style="flex:1;background:#1a1a2e;border:1px solid #1e293b;border-radius:8px;padding:12px;color:#e0e0e0">
+<input type="text" name="mot3" placeholder="ex: passionné" style="flex:1;background:#1a1a2e;border:1px solid #1e293b;border-radius:8px;padding:12px;color:#e0e0e0">
+</div>
+</div>
+
+<div class="section">
+<h2>🔐 Mode de validation</h2>
+
+<label>10. Comment veux-tu valider les réponses au début ?</label>
+<div class="opt-group">
+<label><input type="radio" name="validation" value="manuel" required> J'approuve chaque réponse (1 semaine)</label>
+<label><input type="radio" name="validation" value="auto_pos"> Auto pour les positifs, je valide les négatifs</label>
+<label><input type="radio" name="validation" value="auto"> Full auto, je fais confiance</label>
+</div>
+</div>
+
+<button type="submit" class="btn-submit" id="btn-submit">✅ Générer mon profil de réponse</button>
+</form>
+
+<div id="status">
+<h2>✅ Profil reçu !</h2>
+<p>Nous allons générer 3 réponses test dans votre ton.
+Vous les recevrez sous 24h pour validation.</p>
+</div>
+
+</div>
+
+<script>
+document.getElementById('calibrate-form').addEventListener('submit', async function(e) {
+e.preventDefault();
+const btn = document.getElementById('btn-submit');
+btn.disabled = true;
+btn.textContent = '⏳ Envoi...';
+
+const data = new FormData(this);
+try {
+const resp = await fetch('http://90.3.236.78:8081/calibrate', {
+method: 'POST',
+body: data
+});
+if (resp.ok) {
+document.getElementById('calibrate-form').style.display = 'none';
+document.getElementById('status').style.display = 'block';
+} else {
+throw new Error('Erreur');
+}
+} catch(err) {
+alert('❌ Erreur de connexion. Contactez-nous.');
+btn.disabled = false;
+btn.textContent = '✅ Générer mon profil';
+}
+});
+</script>
+</body>
+</html>
