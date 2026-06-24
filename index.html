@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReviewWatch — Réponses automatiques aux avis Google</title>
-    <meta name="description" content="Ne perdez plus de clients à cause d'avis ignorés. ReviewWatch répond automatiquement à chaque avis Google en 30 secondes. 79€/mois, zéro effort.">
+    <title>ReviewWatch — Réponses automatiques aux avis Google dès 9,99€</title>
+    <meta name="description" content="Ne perdez plus de clients. ReviewWatch répond automatiquement à chaque avis Google. À partir de 9,99€/mois. IA personnalisée, WhatsApp inclus.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #0a0a0f;
             color: #e0e0e0;
             line-height: 1.6;
@@ -42,316 +42,244 @@
             max-width: 650px;
             margin-bottom: 40px;
         }
-        .hero .stat-row {
+        .hero .price-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4ade8022, #22d3ee22);
+            border: 1px solid #4ade8044;
+            border-radius: 100px;
+            padding: 12px 32px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4ade80;
+            margin-bottom: 30px;
+        }
+
+        /* Stats */
+        .stats {
             display: flex;
             gap: 40px;
             flex-wrap: wrap;
             justify-content: center;
             margin: 40px 0;
         }
-        .hero .stat {
-            text-align: center;
-        }
-        .hero .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #4ade80;
-            display: block;
-        }
-        .hero .stat-label {
-            font-size: 0.9rem;
-            color: #64748b;
-        }
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #4ade80, #22d3ee);
-            color: #0a0a0f;
-            font-weight: 700;
-            padding: 18px 48px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 20px;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(74, 222, 128, 0.3);
-        }
+        .stat { text-align: center; }
+        .stat .num { font-size: 2rem; font-weight: 800; color: #22d3ee; }
+        .stat .label { color: #64748b; font-size: 0.85rem; }
 
-        /* Features */
-        .features {
-            padding: 80px 20px;
-        }
-        .features h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 60px;
-            color: #f1f5f9;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .feature-card {
-            background: #12121f;
-            border: 1px solid #1e293b;
-            border-radius: 16px;
-            padding: 30px;
-            transition: border-color 0.3s;
-        }
-        .feature-card:hover {
-            border-color: #4ade80;
-        }
-        .feature-card .icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-        .feature-card h3 {
-            color: #f1f5f9;
-            margin-bottom: 10px;
-        }
-        .feature-card p {
-            color: #94a3b8;
-            font-size: 0.95rem;
-        }
-
-        /* Pricing */
+        /* Pricing Cards */
         .pricing {
             padding: 80px 20px;
             text-align: center;
         }
         .pricing h2 {
             font-size: 2rem;
-            margin-bottom: 20px;
-            color: #f1f5f9;
+            margin-bottom: 12px;
         }
-        .pricing .price-box {
-            display: inline-block;
-            background: #12121f;
-            border: 1px solid #4ade80;
-            border-radius: 20px;
-            padding: 40px 60px;
-            margin-top: 30px;
+        .pricing .subtitle {
+            color: #64748b;
+            margin-bottom: 50px;
         }
-        .pricing .price {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #4ade80;
-        }
-        .pricing .price span {
-            font-size: 1rem;
-            color: #94a3b8;
-            font-weight: 400;
-        }
-        .pricing ul {
-            list-style: none;
-            margin: 20px 0;
-            text-align: left;
-        }
-        .pricing ul li {
-            padding: 8px 0;
-            color: #cbd5e1;
-        }
-        .pricing ul li::before {
-            content: "✅ ";
-        }
-
-        /* Signup */
-        .signup {
-            padding: 80px 20px;
-            text-align: center;
-        }
-        .signup h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: #f1f5f9;
-        }
-        .signup p {
-            color: #94a3b8;
-            margin-bottom: 30px;
-        }
-        .signup-form {
-            max-width: 500px;
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 900px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
         }
-        .signup-form input {
+        @media (max-width: 768px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+        .card {
             background: #12121f;
             border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 16px 20px;
-            color: #f1f5f9;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
         }
-        .signup-form input:focus {
+        .card:hover { border-color: #4ade8033; transform: translateY(-2px); }
+        .card.popular {
             border-color: #4ade80;
+            border-width: 2px;
         }
-        .signup-form button {
+        .card.popular::before {
+            content: "POPULAIRE";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #4ade80, #22d3ee);
+            color: #0a0a0f;
+            padding: 4px 20px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .card .icon { font-size: 2.5rem; margin-bottom: 12px; }
+        .card h3 { font-size: 1.3rem; margin-bottom: 4px; }
+        .card .desc { color: #64748b; font-size: 0.85rem; margin-bottom: 20px; }
+        .card .price { font-size: 2.5rem; font-weight: 800; color: #4ade80; }
+        .card .price span { font-size: 1rem; font-weight: 400; color: #64748b; }
+        .card .per { color: #64748b; font-size: 0.8rem; margin-bottom: 20px; }
+        .card ul { list-style: none; margin: 20px 0; text-align: left; }
+        .card ul li { padding: 6px 0; font-size: 0.9rem; color: #cbd5e1; }
+        .card ul li::before { content: "✓ "; color: #4ade80; font-weight: 700; }
+
+        .btn {
+            display: inline-block;
             background: linear-gradient(135deg, #4ade80, #22d3ee);
             color: #0a0a0f;
             font-weight: 700;
-            padding: 16px;
-            border: none;
+            padding: 14px 48px;
             border-radius: 12px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: transform 0.2s;
+            text-decoration: none;
+            font-size: 1.05rem;
+            margin-top: 10px;
         }
-        .signup-form button:hover {
-            transform: translateY(-2px);
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #4ade80;
+            color: #4ade80;
         }
 
-        .footer {
+        /* How it works */
+        .howto {
+            padding: 80px 20px;
+            background: #0d0d15;
+        }
+        .howto h2 { text-align: center; font-size: 2rem; margin-bottom: 50px; }
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 800px; margin: 0 auto; }
+        @media (max-width: 768px) { .steps { grid-template-columns: 1fr; } }
+        .step-card { text-align: center; }
+        .step-card .num { font-size: 3rem; font-weight: 800; color: #4ade8022; }
+        .step-card h3 { margin-bottom: 8px; }
+        .step-card p { color: #64748b; font-size: 0.9rem; }
+
+        /* Footer */
+        footer { padding: 40px 20px; text-align: center; color: #475569; font-size: 0.85rem; border-top: 1px solid #1e293b; }
+        footer a { color: #4ade80; }
+
+        /* WhatsApp section */
+        .wa-feature {
+            padding: 60px 20px;
             text-align: center;
-            padding: 40px;
-            color: #64748b;
-            font-size: 0.85rem;
             border-top: 1px solid #1e293b;
         }
-
-        @media (max-width: 640px) {
-            .hero .stat-row { gap: 20px; }
-            .pricing .price-box { padding: 30px 20px; }
+        .wa-feature .badge {
+            display: inline-block;
+            background: #25D36622;
+            border: 1px solid #25D36644;
+            border-radius: 100px;
+            padding: 6px 20px;
+            color: #25D366;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
 <section class="hero">
-    <div class="container">
-        <h1>Ne laissez plus un avis Google sans réponse</h1>
-        <p>Chaque avis ignoré, c'est un client potentiel perdu. ReviewWatch répond automatiquement à tous vos avis Google en 30 secondes — dans le ton de votre marque, 24h/24.</p>
-        <div class="stat-row">
-            <div class="stat">
-                <span class="stat-number">22%</span>
-                <span class="stat-label">Plus de clients avec réponses aux avis</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">30s</span>
-                <span class="stat-label">Temps de réponse moyen</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">0</span>
-                <span class="stat-label">Effort de votre part</span>
-            </div>
-        </div>
-        <a href="#signup" class="cta-button">🚀 Démarrer l'essai gratuit</a>
+    <div class="price-badge">🚀 À partir de 9,99€/mois</div>
+    <h1>Répondez automatiquement<br>à tous vos avis Google</h1>
+    <p>+0.5 point de note en 2 mois. 2h gagnées par semaine. Sans effort.</p>
+    <a href="#pricing" class="btn">Voir les offres →</a>
+    <div class="stats">
+        <div class="stat"><div class="num">9,99€</div><div class="label">Prix de départ</div></div>
+        <div class="stat"><div class="num">+0.5</div><div class="label">Point gagné en 2 mois</div></div>
+        <div class="stat"><div class="num">2h</div><div class="label">Gagnées par semaine</div></div>
+        <div class="stat"><div class="num">✅</div><div class="label">IA personnalisée</div></div>
     </div>
 </section>
 
-<section class="features">
-    <div class="container">
-        <h2>Comment ça marche</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="icon">🔍</div>
-                <h3>Surveillance automatique</h3>
-                <p>ReviewWatch surveille vos avis Google toutes les 2 heures. Dès qu'un nouvel avis tombe, il est détecté instantanément.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🤖</div>
-                <h3>Réponse IA personnalisée</h3>
-                <p>Notre IA génère une réponse professionnelle et adaptée au ton de votre établissement — positive ou négative, toujours pertinente.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">📱</div>
-                <h3>Validation sur Telegram</h3>
-                <p>Recevez chaque réponse proposée sur Telegram. Validez, modifiez ou laissez partir automatiquement. Vous gardez le contrôle.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">📈</div>
-                <h3>Impact visible sur votre note</h3>
-                <p>Les commerces qui répondent à leurs avis voient leur note augmenter de 0.5 à 1 étoile en moyenne sur 6 mois.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">⚡</div>
-                <h3>Installation en 5 minutes</h3>
-                <p>Donnez-nous votre établissement, on connecte tout. Aucune compétence technique requise.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🔄</div>
-                <h3>Multi-établissements</h3>
-                <p>Vous avez plusieurs restaurants, hôtels ou magasins ? On gère tout depuis un seul tableau de bord.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="pricing">
-    <div class="container">
-        <h2>Un prix qui change tout</h2>
-        <p>Comparez : une agence facture 300-500€/mois pour répondre aux avis. Nous, c'est 79€.</p>
-        <div class="price-box">
-            <div class="price">79€ <span>/mois</span></div>
+<section class="pricing" id="pricing">
+    <h2>🥇 Une offre pour chaque commerce</h2>
+    <p class="subtitle">Pas de frais cachés. Pas d'engagement. 7 jours gratuits.</p>
+    
+    <div class="pricing-grid">
+        <div class="card">
+            <div class="icon">🚀</div>
+            <h3>Solo</h3>
+            <div class="desc">Pour l'artisan indépendant</div>
+            <div class="price">9,99<span>€</span></div>
+            <div class="per">/mois — 1 établissement</div>
             <ul>
-                <li>Surveillance 24h/24, 7j/7</li>
-                <li>Réponses IA illimitées</li>
-                <li>Validation Telegram incluse</li>
-                <li>1 établissement (5€/sup. supplémentaire)</li>
-                <li>Annulation à tout moment</li>
+                <li>Réponses automatiques aux avis</li>
+                <li>IA personnalisée (votre ton)</li>
+                <li>Alertes WhatsApp</li>
+                <li>Dashboard de suivi</li>
             </ul>
-            <a href="#signup" class="cta-button" style="margin-top:10px">👉 Essai gratuit 7 jours</a>
+            <a href="https://buy.stripe.com/00w8wRb8h3bQ2sO2jm2cg06" class="btn btn-outline">Choisir Solo →</a>
+        </div>
+
+        <div class="card popular">
+            <div class="icon">⚡</div>
+            <h3>Pro</h3>
+            <div class="desc">Pour les petites chaînes</div>
+            <div class="price">24,99<span>€</span></div>
+            <div class="per">/mois — 3 établissements</div>
+            <ul>
+                <li>✅ Tout ce que Solo offre</li>
+                <li>Jusqu'à 3 établissements</li>
+                <li>Réponses personnalisées par lieu</li>
+                <li>Support prioritaire WhatsApp</li>
+            </ul>
+            <a href="https://buy.stripe.com/3cIbJ3ccl13I6J44ru2cg07" class="btn">Choisir Pro →</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏆</div>
+            <h3>Max</h3>
+            <div class="desc">Pour les franchises & chaînes</div>
+            <div class="price">49,99<span>€</span></div>
+            <div class="per">/mois — Illimité</div>
+            <ul>
+                <li>✅ Tout ce que Pro offre</li>
+                <li>Établissements illimités</li>
+                <li>Rapport mensuel personnalisé</li>
+                <li>Campagne Google Ads offerte</li>
+            </ul>
+            <a href="https://buy.stripe.com/6oU8wRdgp4fUc3ogac2cg08" class="btn btn-outline">Choisir Max →</a>
         </div>
     </div>
 </section>
 
-<section class="signup" id="signup">
-    <div class="container">
-        <h2>Prêt à ne plus perdre un seul client ?</h2>
-        <p>Laissez votre email. On vous configure tout — vous recevrez votre première réponse d'ici 24h.</p>
-        <form class="signup-form" id="reviewwatch-form">
-            <input type="text" name="business" placeholder="Nom de votre établissement" required>
-            <input type="text" name="address" placeholder="Adresse Google Maps (ville, rue)" required>
-            <input type="email" name="email" placeholder="Votre email" required>
-            <button type="submit" id="submit-btn">🚀 Lancer ReviewWatch</button>
-            <div id="form-status" style="display:none;padding:10px;border-radius:8px;"></div>
-        </form>
+<section class="wa-feature">
+    <div class="badge">💬 EXCLUSIVITÉ</div>
+    <h2>Vos clients vous répondent sur WhatsApp</h2>
+    <p style="color:#64748b;max-width:600px;margin:20px auto;">
+        Seul service en France à intégrer WhatsApp directement. Quand un client laisse un avis, 
+        vous recevez une notification WhatsApp avec la réponse pré-générée. Vous validez en 1 clic.
+    </p>
+</section>
 
-        <script>
-        document.getElementById('reviewwatch-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submit-btn');
-            const status = document.getElementById('form-status');
-            const formData = new FormData(this);
-
-            btn.disabled = true;
-            btn.textContent = '⏳ Envoi en cours...';
-            status.style.display = 'none';
-
-            try {
-                const resp = await fetch('http://90.3.236.78:8081/', {
-                    method: 'POST',
-                    body: new URLSearchParams(formData),
-                });
-                if (resp.ok || resp.status === 303) {
-                    this.innerHTML = '<div style="text-align:center;padding:20px">' +
-                        '<div style="font-size:3rem;margin-bottom:10px">✅</div>' +
-                        '<h3 style="color:#4ade80">Inscription reçue !</h3>' +
-                        '<p style="color:#94a3b8">Nous vous recontactons sous 24h.</p></div>';
-                } else {
-                    throw new Error('Erreur serveur');
-                }
-            } catch(err) {
-                status.style.display = 'block';
-                status.style.background = '#2d1b1b';
-                status.style.color = '#ef4444';
-                status.textContent = '❌ Erreur de connexion. Envoyez-nous un email à contact@gk365.fr';
-                btn.disabled = false;
-                btn.textContent = '🚀 Lancer ReviewWatch';
-            }
-        });
-        </script>
+<section class="howto">
+    <h2>⚡ Comment ça marche</h2>
+    <div class="steps">
+        <div class="step-card">
+            <div class="num">01</div>
+            <h3>Vous payez</h3>
+            <p>2 minutes sur Stripe. Pas d'engagement.</p>
+        </div>
+        <div class="step-card">
+            <div class="num">02</div>
+            <h3>On calibre l'IA</h3>
+            <p>5 questions pour qu'elle parle comme vous.</p>
+        </div>
+        <div class="step-card">
+            <div class="num">03</div>
+            <h3>Ça tourne</h3>
+            <p>Réponses automatiques. +0.5 point en 2 mois.</p>
+        </div>
     </div>
 </section>
 
-<footer class="footer">
-    <p>ReviewWatch — Propulsé par Hermes Agent · © 2026 · Conçu et opéré par DBZ GOUKY</p>
+<footer>
+    <p>SAS GK365 — Noisiel (77) — <a href="mailto:contact@gk365.fr">contact@gk365.fr</a></p>
+    <p style="margin-top:8px">Paiement sécurisé Stripe • Données hébergées en France</p>
 </footer>
 
 </body>
