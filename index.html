@@ -26,14 +26,32 @@
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
         /* Hero */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(10,10,15,.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+        header .container {
+            max-width: 1100px; margin: 0 auto;
+            padding: 16px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        header .logo { font-weight: 800; font-size: 19px; color: #fff; }
+        header .logo span { color: #2dd4bf; }
+        header .nav-links { display: flex; gap: 24px; }
+        header .nav-links a {
+            color: #94a3b8; text-decoration: none; font-size: 14.5px;
+            transition: color .15s;
+        }
+        header .nav-links a:hover { color: #2dd4bf; }
         .hero {
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px 20px;
+            padding: 70px 20px 50px;
             background: radial-gradient(ellipse at center, #12121f 0%, #0a0a0f 70%);
         }
         .hero h1 {
@@ -95,6 +113,9 @@
             gap: 20px;
             max-width: 900px;
             margin: 0 auto;
+        }
+        @media (max-width: 640px) {
+            header .nav-links { display: none; }
         }
         @media (max-width: 768px) {
             .pricing-grid { grid-template-columns: 1fr; }
@@ -248,6 +269,17 @@
 </head>
 <body>
 
+<header>
+  <div class="container">
+    <div class="logo">⭐ <span>Review</span>Watch</div>
+    <div class="nav-links">
+      <a href="#preview">Aperçu</a>
+      <a href="#pricing">Tarifs</a>
+      <a href="https://wa.me/33682803245">Contact</a>
+    </div>
+  </div>
+</header>
+
 <section class="hero">
     <div class="price-badge">🚀 À partir de 9,99€/mois</div>
     <h1>Répondez automatiquement<br>à tous vos avis Google</h1>
@@ -261,7 +293,7 @@
     </div>
 </section>
 
-<section class="preview">
+<section class="preview" id="preview">
     <h2>📱 Votre tableau de bord en vrai</h2>
     <p class="subtitle">Avis Google, réponses IA, statistiques — tout en un coup d'œil.</p>
 
